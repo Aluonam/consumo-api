@@ -1,14 +1,14 @@
 
 1. Crear carpeta de la pantalla que vamos a visualizar: dentro un index.js y un style.module.css
 
-2. Dentro de index.js se introduce una función típica:
+2. Dentro de index.js se introduce una función típica: 
 
 ```javascript
 export default function Home() {
   return (
     <>
       <main >
-        Ejemplo
+
       </main>
     </>
   )
@@ -37,4 +37,6 @@ export default function Home() {
 }
 ```
 
-5. 
+5. Consumir API: Analizar que componente necesitará recibir esos datos. Si está dentro de otra pantalla la lógica para hacer el consumo API irá dentro de esa pantalla (en este caso: pokemonScreen --> index.js). Dentro de ese index.js se hará la llamada a API.
+
+6. 
