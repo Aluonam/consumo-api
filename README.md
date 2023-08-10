@@ -70,7 +70,7 @@ En este código además se imprime por consola y se llama a la función para ver
 ```javascript
 export default function Home() {
 
-    const [dataFetch, setDataFetch] = useState(second)
+    const [dataFetch, setDataFetch] = useState([])
 
     //Crear funcion asíncrona, con un try-catch:
     const llamadaAPI = async () => {
@@ -85,7 +85,54 @@ export default function Home() {
         catch(error){
             console.log('Error detectado', error)
         }
+        finally{
+        console.log("Se ha terminado todo el proceso.")
+    }
     }
     
     llamadaAPI()
 ```
+
+7. Pasar como props a cajaListado el setDataFetch (pokemonScreen>Index.js)
+
+```javascript
+// En pokemonScreen/index.js
+  return (
+    <>
+      <main >
+       {/* Se especifica que los datos de la variable del useState se van a pasar al componente CajaListado */}
+        <CajaListado dataFetch={dataFetch} />
+        <CajaBoton />
+      </main>
+    </>
+  )
+}
+```
+
+```javascript
+// En componente CajaListado:
+  //1. Se pasa por props los datos:
+const CajaListado = ({dataFetch}) => {
+
+  {/*Dentro de una constante: 
+    1. Se hace .map para reecorrer el array que llega y se saca el item actual y la posición que recorre.
+    2. Se crea una etiqueta HTML con el contenido: nombre del pokemon (se le tiene que pasar la key con info de JS por eso va entre `${}` )*/}
+  const listadoPokemon =  dataFetch.map((pokemon, index) =>  <li key={index}>{pokemon.name}</li>)
+   
+  return (
+    <>
+   <div>
+      <h2>Lista de Pokémon</h2>
+      <ul>
+        {listadoPokemon}
+      </ul>
+    </div>
+    </>
+  )
+}
+```
+***(para verlo ya que trabajamos sobre una screen y no sobre la principal habrá que añadir al localHost el / con el nombre de la pantalla donde están los datos: http://localhost:3000/pokemonScreen )
+
+8. Ahora que salen todos los datos que queremos podemos efectuar la lógica que se pida:
+--> Muestralo alfabeticamente desde la Z a la A.
+

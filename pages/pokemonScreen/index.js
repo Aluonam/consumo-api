@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function Home() {
 
-    const [dataFetch, setDataFetch] = useState(second)
+    const [dataFetch, setDataFetch] = useState([])
 
     //Crear funcion asíncrona, con un try-catch:
     const llamadaAPI = async () => {
@@ -14,18 +14,22 @@ export default function Home() {
             //pasamos esos datos a .json
             const datos = await llamadaLink.json()
             //Se guardan los datos en la variable del useState
-            setDataFetch(datos)
+            setDataFetch(datos.results) 
         }
         catch(error){
             console.log('Error detectado', error)
         }
+        finally{
+          console.log("Se ha terminado todo el proceso.")
+      }
     }
     
     llamadaAPI()
   return (
     <>
       <main >
-        <CajaListado />
+        {/* Se especifica que los datos de la variable del useState se van a pasar al componente CajaListado */}
+        <CajaListado dataFetch={dataFetch} />
         <CajaBoton />
       </main>
     </>

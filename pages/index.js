@@ -6,7 +6,6 @@ export default function Home() {
     <>
       <main>
       <Link href="pokemonScreen">
-        
       </Link>
       </main>
     </>
