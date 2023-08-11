@@ -90,7 +90,6 @@ export default function Home() {
     }
     }
     
-    llamadaAPI()
 ```
 
 7. Pasar como props a cajaListado el setDataFetch (pokemonScreen>Index.js)
@@ -135,4 +134,14 @@ const CajaListado = ({dataFetch}) => {
 
 8. Ahora que salen todos los datos que queremos podemos efectuar la lógica que se pida:
 --> Muestralo alfabeticamente desde la Z a la A.
+Para esto: 
+8.1. Meter los datos de los nombres de pokemons en un array (en useState)
+
+
+8.2. Se crea boton en el componente CajaBoton
+8.3. Dentro del componente CajaBoton se mete lógica para colocar los nombres alfabéticamente.
+8.4. Se llama a la función que coloca los nombres  en el botón.
+
+
+**Si se quiere acceder a datos dentro de esa URL habría que hacer otro consumo API entero con la URL nueva.**
 

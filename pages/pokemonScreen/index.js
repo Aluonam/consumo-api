@@ -1,36 +1,47 @@
-import CajaBoton from "@/components/CajaBoton";
 import CajaListado from "@/components/CajaListado";
-import { useState } from "react";
+import CajaBoton from "@/components/CajaBoton";
+import { useState, useEffect } from "react";
 
 export default function Home() {
 
-    const [dataFetch, setDataFetch] = useState([])
+    const [nombresPokemon, setNombresPokemon] = useState([])
+    const [dataAPIPokemon, setDataAPIPokemon] = useState([])
 
-    //Crear funcion asíncrona, con un try-catch:
+    // ------------------useEffect para llamar a la API una vez  y q no entre en bucle 
+    useEffect(() => {
+     llamadaAPI();
+    }, [])
+    
+    // -------------------useEffect para cuando se ejecute la llamada a API se guardará el nombre de los pokemons.
+    useEffect(() => {
+      if(dataAPIPokemon.length>0){
+        setNombresPokemon(dataAPIPokemon.map((pokemon) => pokemon.name))
+      }
+    }, [dataAPIPokemon]) //Escucha cuando cambia dataAPIPokemon
+
+
+
+    //--------------------Crear funcion asíncrona, con un try-catch:
     const llamadaAPI = async () => {
         try{
             //se llama con fetch al link de la API (añadir el await para que hasta que no devuelva datos no continue leyendo el código)
             const llamadaLink = await fetch('https://pokeapi.co/api/v2/pokemon')
-            //pasamos esos datos a .json
-            const datos = await llamadaLink.json()
+            const datos = await llamadaLink.json() //pasamos esos datos a .json
             //Se guardan los datos en la variable del useState
-            setDataFetch(datos.results) 
+            setDataAPIPokemon(datos.results) 
         }
         catch(error){
             console.log('Error detectado', error)
         }
-        finally{
-          console.log("Se ha terminado todo el proceso.")
-      }
     }
+
     
-    llamadaAPI()
   return (
     <>
       <main >
         {/* Se especifica que los datos de la variable del useState se van a pasar al componente CajaListado */}
-        <CajaListado dataFetch={dataFetch} />
-        <CajaBoton />
+        <CajaListado nombresPorListar={nombresPokemon} />
+        <CajaBoton nombresPorOrdenar={nombresPokemon} setState={setNombresPokemon} />
       </main>
     </>
   )

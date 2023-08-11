@@ -1,9 +1,9 @@
 import React from 'react'
 
 //FUNCION:mostrar el listado (recibirá props con esta información)
-const CajaListado = ({dataFetch}) => {
+const CajaListado = ({nombresPorListar}) => {
 
-  const listadoPokemon =  dataFetch.map((pokemon, index) =>  <li key={index}>{pokemon.name}</li>)
+  const listadoPokemon =  nombresPorListar.map((pokemonName, index) =>  <li key={index}>{pokemonName}</li>)
   
   return (
     <>
